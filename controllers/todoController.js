@@ -11,7 +11,8 @@ exports.getTodos = async (req, res, next) => {
 
 exports.createTodo = async (req, res, next) => {
   try {
-    const todo = await Todo.create({ title: req.body.title });
+    const { title, priority } = req.body;
+    const todo = await Todo.create({ title, priority });
     res.status(201).json(todo);
   } catch (err) {
     next(err);
@@ -20,9 +21,12 @@ exports.createTodo = async (req, res, next) => {
 
 exports.updateTodo = async (req, res, next) => {
   try {
-    const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const { completed, priority } = req.body;
+    const todo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { completed, priority },
+      { new: true }
+    );
     if (!todo) {
       res.status(404);
       throw new Error("Todo not found");
