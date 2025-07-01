@@ -6,11 +6,15 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const app = express();
 app.use(
   cors({
-    origin: "https://todo-frontend-rosy-five.vercel.app",
+    origin: [
+      "https://todo-frontend-rosy-five.vercel.app",
+      "http://localhost:3000",
+    ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API is running");
