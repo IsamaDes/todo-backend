@@ -15,6 +15,10 @@ const TodoSchema = new mongoose.Schema(
       enum: ["low", "medium", "high"],
       default: "low",
     },
+    dueDate: {
+      type: Date,
+      required: false,
+    },
   },
   { timestamps: true }
 );

@@ -11,8 +11,8 @@ exports.getTodos = async (req, res, next) => {
 
 exports.createTodo = async (req, res, next) => {
   try {
-    const { title, priority } = req.body;
-    const todo = await Todo.create({ title, priority });
+    const { title, priority, dueDate } = req.body;
+    const todo = await Todo.create({ title, priority, dueDate });
     res.status(201).json(todo);
   } catch (err) {
     next(err);
