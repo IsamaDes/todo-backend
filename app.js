@@ -6,6 +6,9 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 app.use("/api/todos", todoRoutes);
 app.use(notFound);
 app.use(errorHandler);
