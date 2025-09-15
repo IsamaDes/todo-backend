@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
+const errorHandler = require("../../middleware/errorMiddleware")
 
 const router = express.Router();
 
@@ -43,10 +44,10 @@ router.post("/", async (req, res, next) => {
       return res.status(400).json({ message: "Email and password required" });
 
     const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) return res.status(401).json({ message: "Invalid credentials" });
+    if (!user) return errorHandler.invalidCredentials;
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) return res.status(401).json({ message: "Invalid credentials" });
+    if (!valid) return errorHandler.invalidCredentials;
 
     const token = createJwt(user);
 
