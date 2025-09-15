@@ -5,7 +5,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
 
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/authRoutes.js");
 const authMiddleware = require("./middleware/auth");
 
 const app = express();
