@@ -4,7 +4,7 @@ const path = require("path");
 
 const options = {
   definition: {
-    openapi: "3.0.0", // OAS version
+    openapi: "3.0.0", 
     info: {
       title: "Todo API with Auth",
       version: "1.0.0",
@@ -12,7 +12,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:4000/api",
+        url: "http://localhost:5000",
         description: "Local dev server",
       },
     ],
@@ -29,7 +29,7 @@ const options = {
     security: [{ bearerAuth: [] }],
   },
 
-  apis: [path.join(__dirname, "./routes/**/*.js")],
+  apis: [path.join(__dirname, "../controllers/**/*.js")],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
