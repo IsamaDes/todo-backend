@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /auth/me:
+ * /api/auth/me:
  *   get:
  *     summary: Get logged in user's profile
  *     tags: [Auth]

@@ -1,19 +1,19 @@
 const express = require("express");
-const {
-  getTodos,
-  createTodo,
-  updateTodo,
-  deleteTodo,
-} = require("../controllers/todoController");
+const getTodos = require("../controllers/todo/getTodoController");
+const createTodo = require("../controllers/todo/createTodoController");
+const updateTodo = require("../controllers/todo/updateTodoController");
+const deleteTodo = require("../controllers/todo/deleteTodoController");
+
+const auth = require("../middleware/auth")
 
 const router = express.Router();
 
 router.route("/")
-  .get(getTodos)
-  .post(createTodo);
+  .get(auth, getTodos)
+  .post(auth, createTodo);
 
 router.route("/:id")
-  .put(updateTodo)
-  .delete(deleteTodo);
+  .put(auth, updateTodo)
+  .delete(auth, deleteTodo);
 
 module.exports = router;
