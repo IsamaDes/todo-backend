@@ -15,7 +15,8 @@
     "allowJs": true,
     "checkJs": false,
     "moduleDetection": "force",
-    "types": ["node", "express"]
+    "types": ["node"],
+    "resolveJsonModule": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "build"]
