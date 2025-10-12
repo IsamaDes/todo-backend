@@ -52,11 +52,6 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get("/", (_req: Request, res: Response) => {
-  res.send("API is running");
-});
-
-
 app.get("/", (_req: Request, res: Response) => res.send("API is running"));
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
