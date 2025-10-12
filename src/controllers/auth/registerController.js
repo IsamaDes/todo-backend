@@ -1,6 +1,5 @@
 const express = require("express");
-const registerUser = require("../../services/auth/registerService")
-
+const registerUser = require("../../services/auth/registerService");
 
 const router = express.Router();
 
@@ -39,7 +38,6 @@ router.post("/", async (req, res, next) => {
     const response = await registerUser(name, email, password);
 
     res.status(201).json(response);
-
   } catch (err) {
     next(err);
   }

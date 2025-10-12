@@ -1,9 +1,6 @@
-const app = require("./app");
+const app = require("../app");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-
-
-
 
 // Load environment variables
 dotenv.config();
@@ -20,9 +17,7 @@ const startServer = async () => {
     // Start server
     const server = app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
-      console.log(
-        `Swagger docs available at http://localhost:${PORT}`
-      );
+      console.log(`Swagger docs available at http://localhost:${PORT}`);
     });
 
     // Handle server errors

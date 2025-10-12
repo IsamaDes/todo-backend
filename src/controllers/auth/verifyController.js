@@ -1,6 +1,5 @@
 const express = require("express");
-const verifyUser = require("../../services/auth/verificationService")
-
+const verifyUser = require("../../services/auth/verificationService");
 
 const router = express.Router();
 
@@ -25,9 +24,8 @@ const router = express.Router();
 router.post("/", async (req, res, next) => {
   try {
     const { token } = req.body;
-    const response = await verifyUser(token)
+    const response = await verifyUser(token);
     res.status(201).json(response);
-    
   } catch (err) {
     next(err);
   }
