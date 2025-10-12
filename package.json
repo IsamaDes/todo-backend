@@ -47,12 +47,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IsamaDes/Eat-Right-Be"
+    "url": "https://github.com/IsamaDes/TodoBackend"
   },
   "author": "IsamaDes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/IsamaDes/Eat-Right-Be/issues"
+    "url": "https://github.com/IsamaDes/TodoBackend/issues"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
