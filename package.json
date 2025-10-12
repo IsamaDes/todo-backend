@@ -4,9 +4,9 @@
   "private": true,
   "description": "Backend server for TodoBackend",
   "type": "module",
-  "main": "server.ts",
+  "main": "build/server.js",
   "scripts": {
-    "dev": "ts-node-esm src/server.ts",
+    "dev": "tsx src/server.ts",
     "build": "tsc",
     "start": "node build/server.js"
   },
@@ -70,6 +70,7 @@
     "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
+   
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
