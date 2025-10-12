@@ -1,11 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const routes = require("./routes");
-const { notFound, errorHandler } = require("./middleware/errorMiddleware");
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./config/swagger.js");
-const authMiddleware = require("./middleware/auth");
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import authRoutes from "./routes/authRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
+import {
+  notFound,
+  errorHandler,
+  badRequest,
+  invalidCredentials,
+} from"./middleware/errorMiddleware.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec  from "./config/swagger.js";
 
 const app = express();
 
@@ -49,12 +55,16 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-app.get("/api/profile", authMiddleware, async (req, res) => {
-  res.json({ profile: req.user });
-});
-app.use("/api", routes);
+
+app.get("/", (req, res) => res.send("API is running"));
+app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
+app.use("/client", clientRoutes);
+
 
 app.use(errorHandler);
+app.use(badRequest);
+app.use(invalidCredentials);
 app.use(notFound);
 
-module.exports = app;
+export default app;

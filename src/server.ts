@@ -1,6 +1,6 @@
-const app = require("../app");
-const dotenv = require("dotenv");
-const connectDB = require("./config/db");
+import app from "./app.js";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +21,7 @@ const startServer = async () => {
     });
 
     // Handle server errors
-    server.on("error", (err) => {
+    server.on("error", (err: any) => {
       console.error("Server error:", err);
     });
 

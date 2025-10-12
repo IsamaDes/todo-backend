@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const TodoSchema = new mongoose.Schema(
   {
@@ -19,9 +19,9 @@ const TodoSchema = new mongoose.Schema(
       type: Date,
       required: false,
     },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Todo", TodoSchema);
+export default mongoose.model("Todo", TodoSchema);

@@ -1,5 +1,5 @@
-const Todo = require("../../models/Todo");
-
+import type { Request, Response, NextFunction } from "express";
+import Todo from "../../models/Todo.js";
 
 /**
  * @swagger
@@ -26,7 +26,7 @@ const Todo = require("../../models/Todo");
  *       201:
  *         description: Todo created
  */
- async function createTodo(req, res, next){
+ async function createTodo(req: Request, res: Response, next: NextFunction){
   try {
     const { title, priority, dueDate } = req.body;
     const todo = await Todo.create({ title, priority, dueDate, userId: req.user._id });
@@ -36,4 +36,4 @@ const Todo = require("../../models/Todo");
   }
 };
 
-module.exports = createTodo;
+export default createTodo;

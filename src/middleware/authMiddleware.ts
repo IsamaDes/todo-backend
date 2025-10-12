@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+
+import User from "../models/User.js";
+import Jwt, { JwtPayload }  from "jsonwebtoken";
 
 // Extend Express Request interface to include `user`
 declare global {
@@ -26,7 +27,8 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
   if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
+
+      const decoded: any = Jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload
 
       // Fetch user from DB (without password)
       const user = await User.findById(decoded.id).select("-password");
@@ -46,4 +48,4 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
   }
 };
 
-module.exports = {protect};
+export default protect;

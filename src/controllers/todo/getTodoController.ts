@@ -1,4 +1,5 @@
-const Todo = require("../../models/Todo");
+import Todo from "../../models/Todo.js";
+import type { Request, Response, NextFunction } from "express";
 
 /**
  * @swagger
@@ -11,7 +12,7 @@ const Todo = require("../../models/Todo");
  *       200:
  *         description: List of user todos
  */
-async function getTodos (req, res, next){
+async function getTodos (req: Request, res: Response, next: NextFunction){
     try {
       const todos = await Todo.find({userId: req.user._id}) || [];
       res.json(todos);
@@ -19,5 +20,4 @@ async function getTodos (req, res, next){
       next(err);
     }
   };
-
-  module.exports = getTodos;
+export default getTodos;

@@ -1,4 +1,6 @@
-const Todo = require("../../models/Todo");
+import type {Request, Response, NextFunction} from "express"
+
+import Todo from "../../models/Todo.js";
 
 /**
  * @swagger
@@ -31,12 +33,12 @@ const Todo = require("../../models/Todo");
  *       200:
  *         description: Todo updated
  */
-async function updateTodo(req, res, next){
+async function updateTodo(req: Request, res: Response, next: NextFunction){
   try {
     const { completed, priority } = req.body;
     const todo = await Todo.findByIdAndUpdate(
       {_id: req.params.id, userId: req.user._id},
-      { completed, priority, dueDate },
+      { completed, priority },
       { new: true }
     );
     if (!todo) {
@@ -49,4 +51,4 @@ async function updateTodo(req, res, next){
   }
 };
 
-module.exports = updateTodo;
+export default updateTodo;

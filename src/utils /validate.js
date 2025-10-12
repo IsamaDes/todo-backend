@@ -44,6 +44,4 @@ function validRegistrationInput({ name, email, password }) {
   };
 }
 
-module.exports = {
-  validateRegistrationInput,
-};
+export default validRegistrationInput;

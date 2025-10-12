@@ -16,4 +16,4 @@ router.route("/:id")
   .put(auth, updateTodo)
   .delete(auth, deleteTodo);
 
-module.exports = router;
+export default router;

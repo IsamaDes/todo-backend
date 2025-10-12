@@ -1,4 +1,6 @@
-const Todo = require("../../models/Todo");
+
+import type { Request, Response, NextFunction } from "express";
+import Todo from "../../models/Todo.js";
 
 
 /**
@@ -18,9 +20,9 @@ const Todo = require("../../models/Todo");
  *       200:
  *         description: Todo deleted
  */
-async function deleteTodo (req, res, next){
+async function deleteTodo (req: Request, res: Response, next: NextFunction){
   try {
-    const todo = await Todo.findByIdAndDelete({_id: req.params.id, userId: red.user._id});
+    const todo = await Todo.findByIdAndDelete({_id: req.params.id, userId: req.user._id});
     if (!todo) {
       res.status(404);
       throw new Error("Todo not found");
@@ -31,4 +33,4 @@ async function deleteTodo (req, res, next){
   }
 };
 
-module.exports = deleteTodo;
+export default deleteTodo;
