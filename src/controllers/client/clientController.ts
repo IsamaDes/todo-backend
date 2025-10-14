@@ -2,16 +2,12 @@ import { Request, Response } from "express";
 import User from "../../models/User.js";
 
 
-// Extend Request type for TypeScript
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
 
 /**
  * GET /api/client/profile
  * Returns the logged-in client's profile
  */
- const getClientProfile = async (req: AuthenticatedRequest, res: Response) => {
+ const getClientProfile = async (req: Request, res: Response) => {
   try {
     const userId = req.user._id;
 

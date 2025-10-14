@@ -5,6 +5,7 @@ import helmet from "helmet";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
 import {
   notFound,
   errorHandler,
@@ -40,7 +41,6 @@ app.use(
     origin: [
       "https://todo-frontend-rosy-five.vercel.app",
       "http://localhost:3000",
-      "http://localhost:5000",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
@@ -56,6 +56,7 @@ app.get("/", (_req: Request, res: Response) => res.send("API is running"));
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/client", clientRoutes);
+app.use("/todo", todoRoutes);
 
 
 app.use(errorHandler);

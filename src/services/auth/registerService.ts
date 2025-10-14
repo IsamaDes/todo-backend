@@ -38,12 +38,10 @@ const registerUser = async (name: string, email: string, password: string, role:
   await user.save();
 
   return {
-  
   id: user._id,
   email: user.email,
   role: user.role,
   token,
-
 };
   
 };

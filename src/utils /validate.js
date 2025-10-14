@@ -27,7 +27,7 @@ function validRegistrationInput({ name, email, password }) {
   if (!email || !isValidEmail(email)) {
     errors.push("Please provide a valid email address");
   }
-  if (!password || isStrongPassword(password)) {
+  if (!password || !isStrongPassword(password)) {
     errors.push(
       "Password must be atleast 8 characters long and include uppercase, lowercase and a number"
     );

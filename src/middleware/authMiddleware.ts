@@ -3,24 +3,13 @@ import type { Request, Response, NextFunction } from "express";
 import User from "../models/User.js";
 import Jwt, { JwtPayload }  from "jsonwebtoken";
 
-// Extend Express Request interface to include `user`
-declare global {
-  namespace Express {
-    interface Request {
-      user?: any;
-    }
-  }
-}
 
-interface AuthenticatedRequest extends Request {
-  user?: any;
-}
 
 /**
  * Middleware to protect routes.
  * Verifies JWT token and attaches user info to req.user.
  */
-const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+const protect = async (req: Request, res: Response, next: NextFunction) => {
   let token;
 
   // Look for "Bearer <token>" in Authorization header
@@ -37,7 +26,7 @@ const protect = async (req: AuthenticatedRequest, res: Response, next: NextFunct
         return res.status(401).json({ message: "User not found" });
       }
 
-      req.user = user; // Attach user to request
+      req.user = {_id: user._id.toString(), email: user.email, role: user.role}; // Attach user to request
       next();
     } catch (err) {
       console.error("JWT verification failed:", err);
