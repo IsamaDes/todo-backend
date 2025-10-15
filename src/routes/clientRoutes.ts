@@ -8,7 +8,7 @@ import getClientProfile from "../controllers/client/clientController.js";
 
 // Clients can access their profile
 router.get(
-  "/profile/:id",
+  "/profile/me",
   protect,                
   authorizeRoles("client", "admin"), 
   getClientProfile

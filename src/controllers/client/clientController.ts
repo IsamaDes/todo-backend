@@ -1,23 +1,15 @@
-import { Request, Response } from "express";
-import User from "../../models/User.js";
-
-
+// src/controllers/client/clientController.ts
+import type { Request, Response } from "express";
+import { fetchClientProfile } from "../../services/clientService.js";
 
 /**
  * GET /api/client/profile
  * Returns the logged-in client's profile
  */
- const getClientProfile = async (req: Request, res: Response) => {
+const getClientProfile = async (req: Request, res: Response) => {
   try {
-    const userId = req.user._id;
-
-    const client = await User.findById(userId).select(
-      "-password -tokenHash -tokenExpiry"
-    );
-
-    if (!client) {
-      return res.status(404).json({ message: "Client not found" });
-    }
+    const userId = req.user?._id; 
+    const client = await fetchClientProfile(userId);
 
     res.status(200).json({
       success: true,
@@ -25,7 +17,7 @@ import User from "../../models/User.js";
     });
   } catch (error: any) {
     console.error("Error fetching client profile:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 

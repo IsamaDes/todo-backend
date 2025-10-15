@@ -92,15 +92,41 @@ import type { Request, Response, NextFunction } from "express";
 
 
 const registerController = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    
+  
+  
+  
+  
+   try {
     const { name, email, password, role } = req.body;
-    if(!name || !email || !password || !role)       
+    const result = await registerUser(name, email, password, role);
+       if(!name || !email || !password || !role)       
      return res.status(400).json({ message: "All fields are required" });
 
-    const response = await registerUser(name, email, password, role);
-    res.status(201).json(response);
-  } catch (err) {
+    // Set cookies (instead of localStorage)
+    res.cookie("accessToken", result.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 15 * 60 * 1000,
+    });
+
+    res.cookie("refreshToken", result.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: result.id,
+        name: result.name,
+        email: result.email,
+        role: result.role,
+      },
+    });
+  }catch (err) {
     next(err);
   }
 };

@@ -8,7 +8,7 @@ import getAdminDashboard from "../controllers/admin/adminController.js";
 
 // Only admins can access dashboard
 router.get(
-  "/dashboard",
+  "/profile",
   protect,                  // User must be logged in
   authorizeRoles("admin"),  // User must be admin
   getAdminDashboard
